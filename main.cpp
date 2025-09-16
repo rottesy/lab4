@@ -25,7 +25,7 @@ class Ancestor
     char *humanName = nullptr;
 
   public:
-    Ancestor(const char *name)
+    explicit Ancestor(const char *name)
     {
         humanName = new char[myStrlen(name) + 1];
         strcpy_s(humanName, myStrlen(name) + 1, name);
@@ -38,7 +38,7 @@ class Ancestor
 class Kid : public Ancestor
 {
   public:
-    Kid(const char *name) : Ancestor(name) {}
+    explicit Kid(const char *name) : Ancestor(name) {}
     void print() const override { cout << "Name : " << getName() << "\n"; }
 };
 
@@ -54,8 +54,5 @@ class GrandSon : public Kid
         strcpy_s(patronymic, myStrlen(pat) + 1, pat);
     }
     ~GrandSon() override { delete[] patronymic; }
-    void print() const override 
-    {
-        cout << "GrandSon : " << getName() << " " << patronymic << "\n";
-    } 
+    void print() const override { cout << "GrandSon : " << getName() << " " << patronymic << "\n"; }
 };
